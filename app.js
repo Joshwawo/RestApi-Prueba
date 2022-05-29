@@ -2,12 +2,12 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 app.use(bodyParser.json());
-// app.use(cors());
+app.use(cors());
 
 //Mysql
 
@@ -15,119 +15,109 @@ const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'ventas_local',
+    database: 'node_db',
 });
-
-conn.connect(function (err) {
-    if (err) {
-        console.log('error conecting:' + err.stack);
-        return;
-    }
-    console.log('Conectado A la BD ' + conn.threadId)
-})
-
 
 //route
 app.get('/', (req, res) => {
-    res.send('Bienvenido A la Api de Ventas en linea ')
+
 
 
     // res.send('welcome to my Api')
 });
 
-
-
-app.get('/pedido', (req, res) => {
-    const sql = "SELECT * FROM pedido";
+// clientes
+app.get('/clientes', (req, res) => {
+    const sql = 'SELECT * FROM clientes';
     conn.query(sql, (error, resultados) => {
         if (error) throw error;
 
         if (resultados.length > 0) {
             res.json(resultados)
         } else {
-            res.send('Sin resultados en pedidos')
+            res.send('Sin resultados')
         }
+
     });
+    // res.send('lista de clientes')
 });
 
-app.get('/pedido/:id', (req, res) => {
-    const { id } = req.params;
+app.get('/clientes/:id', (req, res) => {
+    // res.send('Obtener lista de clientes por id')
 
-    const sql = `SELECT * FROM pedido WHERE idPedido=${id}`;
+    const { id } = req.params
+    const sql = `SELECT * FROM clientes WHERE id=${id}`;
+
     conn.query(sql, (error, resultado) => {
         if (error) throw error;
 
         if (resultado.length > 0) {
             res.json(resultado)
         } else {
-            res.send('Sin resultados del pedido por ID')
+            res.send('Sin resultados')
         }
-    })
 
+    });
 });
 
-app.post('/agregarPedido', (req, res)=>{
-    const sql = 'INSERT INTO pedido SET ?';
-    const pedidoObj ={
-        Cantidad: req.body.Cantidad,
-        Estado_Pedido: req.body.Estado_Pedido,
-        Fecha: req.body.Fecha,
-        Precio:req.body.Precio,
-        id_Producto:req.body.id_Producto
+app.post('/add', (req, res) => {
+    // res.send('Nuevo cliente')
+
+    const sql = 'INSERT INTO clientes SET ?';
+    const clientesObj = {
+        nombre: req.body.nombre,
+        ciudad: req.body.ciudad
 
     }
 
-    conn.query(sql, pedidoObj, error=>{
-        if(error) throw error;
-        res.send('Pedido Creado!!')
-    });
+    conn.query(sql, clientesObj, err => {
+        if (err) throw err;
+        res.send('usuario creado!!')
+    })
+});
+
+app.put('/update/:id', (req, res) => {
+    // res.send('Actualizar cliente');
+
+    const { id } = req.params;
+    const { nombre, ciudad } = req.body;
+
+    const sql = `UPDATE clientes SET nombre = '${nombre}', ciudad= '${ciudad}' WHERE id=${id}`;
+
+    conn.query(sql, err => {
+        if (err) throw err;
+        res.send('usuario Actualizado!!')
+    })
+
+
 
 });
 
-app.put('/actualizar/:id', (req, res)=>{
-    const {id} = req.params;
+app.delete('/delete/:id', (req, res) => {
+    // res.send('Eliminar Cliente');
+    const { id } = req.params;
+    const sql = `DELETE FROM clientes WHERE id =${id}`;
 
-    const {Estado_Pedido} = req.body;
 
-    const sql = `UPDATE pedido SET Estado_Pedido ='${Estado_Pedido}' WHERE idPedido=${id}`;
 
-    conn.query(sql, error =>{
-        if(error) throw error;
-        res.send('Pedido Actualizado');
+    conn.connect(err => {
+        if (err) throw err;
 
+        console.log('Se conecto a la base de datos');
+
+        conn.query(sql, err => {
+            if (err) throw err;
+            res.send('usuario Eliminado!!');
+        })
     });
+
 })
 
-app.delete('/eliminar/:id', (req,res)=>{
-    const {id}= req.params;
-    const sql = `DELETE FROM pedido WHERE idPedido=${id}`;
-
-    conn.query(sql, error=>{
-        if(error) throw error;
-        res.send('Pedido Eliminado');
-    })
-})
-
-// app.delete('/delete/:id', (req, res) => {
-//     // res.send('Eliminar Cliente');
-//     const { id } = req.params;
-//     const sql = `DELETE FROM clientes WHERE id =${id}`;
+//Check conn
 
 
 
-//     conn.connect(err => {
-//         if (err) throw err;
-
-//         console.log('Se conecto a la base de datos');
-
-//         conn.query(sql, err => {
-//             if (err) throw err;
-//             res.send('usuario Eliminado!!');
-//         })
-//     });
-
-// })
-
+// app.listen(PORT,`Server Runnng http://localhost:${PORT}/`);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`)
