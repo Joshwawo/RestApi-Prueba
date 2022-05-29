@@ -18,16 +18,12 @@ const conn = mysql.createConnection({
     password: '0fc9e62a',
     database: 'heroku_3d99774f81371df',
 });
-
-
 //!mysql://b4db9ca3c8f28f:0fc9e62a@us-cdbr-east-05.cleardb.net/heroku_3d99774f81371df?reconnect=true
 
 //route
 app.get('/', (req, res) => {
 
-
-
-    res.send('welcome to my Api')
+    res.send('Hola soy la api de prueba para los de venta local');
 });
 
 // clientes
