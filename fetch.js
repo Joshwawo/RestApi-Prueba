@@ -1,12 +1,16 @@
 // const fetData = async () => {
 
 //     try {
-//         const res = await fetch('http://localhost:5000/clientes');
+//         const res = await fetch('http://localhost:5000');
 //         const data = await res.json();
 
+//         console.log(data)
+
+
+
+
         
-//         console.log(data[1])
-//         console.log(data[1].id)
+        
 
 
 //     } catch (error) {
