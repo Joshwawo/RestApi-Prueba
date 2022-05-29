@@ -31,7 +31,7 @@ conn.connect(function (err) {
 
 //route
 app.get('/', (req, res) => {
-    res.send('Bienvenido a la api de apoyo de ventas local para  producccion')
+    res.send('Bienvenido a la api de apoyo de ventas local para  producccion a')
 
 
     // res.send('welcome to my Api')
