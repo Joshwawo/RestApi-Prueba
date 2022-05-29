@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 
 
-    // res.send('welcome to my Api')
+    res.send('welcome to my Api')
 });
 
 // clientes
