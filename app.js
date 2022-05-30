@@ -19,7 +19,7 @@ const conn = mysql.createConnection({
     database: 'heroku_3d99774f81371df',
 });
 
-setInterval(function () {
+setInterval(() => {
     conn.query('SELECT 1');
 }, 5000);
 //!mysql://b4db9ca3c8f28f:0fc9e62a@us-cdbr-east-05.cleardb.net/heroku_3d99774f81371df?reconnect=true
@@ -76,17 +76,18 @@ app.get('/pedido/:id', (req, res) => {
 app.post('/agregarPedido', (req, res) => {
     const sql = 'INSERT INTO pedido SET ?';
     const pedidoObj = {
-        Cantidad: req.body.Cantidad,
-        Estado_Pedido: req.body.Estado_Pedido,
-        Fecha: req.body.Fecha,
-        Precio: req.body.Precio,
-        id_Producto: req.body.id_Producto
+        cantidad: req.body.cantidad,
+        estado_Pedido: req.body.estado_Pedido,
+        fecha: req.body.fecha,
+        precio: req.body.precio,
+        id_producto: req.body.id_producto
 
     }
 
     conn.query(sql, pedidoObj, error => {
         if (error) throw error;
-        res.send('Pedido Creado!!')
+        // res.send('Pedido Creado!!')
+        res.send(`pedido creado ${sql}`)
     });
 
 });
