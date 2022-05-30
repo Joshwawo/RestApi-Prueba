@@ -87,7 +87,7 @@ app.post('/agregarPedido', (req, res) => {
     conn.query(sql, pedidoObj, error => {
         if (error) throw error;
         // res.send('Pedido Creado!!')
-        res.send(`pedido creado ${sql}`)
+        res.send(`pedido creado ${pedidoObj}`)
     });
 
 });
@@ -104,11 +104,15 @@ app.put('/actualizar/:id', (req, res) => {
         res.send('Pedido Actualizado');
 
     });
+
+    if(!id){
+        res.send('no existe el pedido con ese id')
+    }
 })
 
 app.delete('/eliminar/:id', (req, res) => {
     const { id } = req.params;
-    const sql = `DELETE FROM pedido WHERE idPedido=${id}`;
+    const sql = `DELETE FROM pedido WHERE id_pedido=${id}`;
 
     conn.query(sql, error => {
         if (error) throw error;
