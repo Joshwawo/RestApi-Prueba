@@ -18,20 +18,25 @@ const conn = mysql.createConnection({
     password: '0fc9e62a',
     database: 'heroku_3d99774f81371df',
 });
+
+setInterval(function () {
+    conn.query('SELECT 1');
+}, 5000);
 //!mysql://b4db9ca3c8f28f:0fc9e62a@us-cdbr-east-05.cleardb.net/heroku_3d99774f81371df?reconnect=true
 
-conn.connect(function (err) {
-    if (err) {
-        console.log('error conecting:' + err.stack);
-        return;
-    }
-    console.log('Conectado A la BD ' + conn.threadId)
-})
+
+// conn.connect(function (err) {
+//     if (err) {
+//         console.log('error conecting:' + err.stack);
+//         return;
+//     }
+//     console.log('Conectado A la BD ' + conn.threadId)
+// })
 
 
 //route
 app.get('/', (req, res) => {
-    res.send('Bienvenido a la api de apoyo de ventas local para  producccion a')
+    res.send('Bienvenido a la api de apoyo de ventas local para  producccion 😪😪');
 
 
     // res.send('welcome to my Api')
