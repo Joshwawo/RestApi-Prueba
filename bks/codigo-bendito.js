@@ -51,28 +51,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/addped', (req, res) => {
-        // res.send(JSON.stringify(formularioArray))
+        res.send(JSON.stringify(formularioArray))
 });
 
-// app.post('/addped', (req, res) => {
-//     const sql = 'INSERT INTO pedido SET ?';
-//     let formulario = req.body;
-//     console.log('me llego el post');
-//     // console.log(req.body);
-//     // formularioArray.push(formulario);
-//     // res.json(JSON.stringify("Guardado en la db"))
-//     res.json(JSON.stringify("Guardado en la db"));
-//     console.log(formularioArray);
-
-//     conn.query(sql, formulario, error=>{
-//         if(error) throw error;
-//         // res.send('pedido creado');
-
-//     })
-    
-// });
-
-app.post('/agregarPedido', (req, res) => {
+app.post('/addped', (req, res) => {
     const sql = 'INSERT INTO pedido SET ?';
     let formulario = req.body;
     console.log('me llego el post');
@@ -87,47 +69,27 @@ app.post('/agregarPedido', (req, res) => {
         // res.send('pedido creado');
 
     })
+    
 });
 
-app.put('/act', (req,res)=>{
-    
-})
 
+app.post('/agregarPedido', (req, res) => {
+    const sql = 'INSERT INTO pedido SET ?';
+    const pedidoObj = {
+        cantidad: req.body.cantidad,
+        estado_Pedido: req.body.estado_Pedido,
+        fecha: req.body.fecha,
+        precio: req.body.precio,
+        id_producto: req.body.id_producto
+    }
 
-
-app.put('/actualizar/:id', (req, res) => {
-    const { id } = req.params;
-    const { Estado_Pedido } = req.body;
-    const sql = `UPDATE pedido SET Estado_Pedido ='${Estado_Pedido}' WHERE idPedido=${id}`;
-    conn.query(sql, error => {
+    conn.query(sql, pedidoObj, error => {
         if (error) throw error;
-        res.send('Pedido Actualizado');
-
+        // res.send('Pedido Creado!!')
+        res.send(`pedido creado ${pedidoObj}`)
     });
 
-    if (!id) {
-        res.send('no existe el pedido con ese id')
-    }
-})
-
-
-// app.post('/agregarPedido', (req, res) => {
-//     const sql = 'INSERT INTO pedido SET ?';
-//     const pedidoObj = {
-//         cantidad: req.body.cantidad,
-//         estado_Pedido: req.body.estado_Pedido,
-//         fecha: req.body.fecha,
-//         precio: req.body.precio,
-//         id_producto: req.body.id_producto
-//     }
-
-//     conn.query(sql, pedidoObj, error => {
-//         if (error) throw error;
-//         // res.send('Pedido Creado!!')
-//         res.send(`pedido creado ${pedidoObj}`)
-//     });
-
-// });
+});
 
 
 

@@ -1,17 +1,30 @@
-// const fetData = async () => {
+const fetData = async () => {
 
-//     try {
-//         const res = await fetch('https://ventas-local-api.herokuapp.com/');
-//         const data = await res.json();
+    try {
+        const res = await fetch('https://ventas-local-api.herokuapp.com/');
+        const data = await res.json();
 
-//         console.log(data)
+        console.log(data)
 
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-// fetData();
+fetData();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const axios = require('axios');
 console.log('hola soy el front')

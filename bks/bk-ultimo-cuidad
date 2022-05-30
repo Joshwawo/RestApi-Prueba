@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-//Mysql
+//Mysqls
 
 const conn = mysql.createConnection({
     host: 'us-cdbr-east-05.cleardb.net',

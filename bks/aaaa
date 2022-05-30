@@ -1,0 +1,16 @@
+app.post('/addped', (req, res) => {
+    const sql = 'INSERT INTO pedido SET ?';
+    let formulario = req.body;
+    console.log('me llego el post');
+    console.log(req.body);
+    // formularioArray.push(formulario);
+    res.json(JSON.stringify("Guardado en la db"))
+    // res.send(JSON.stringify("Guardado en la db"));
+    console.log(formularioArray);
+
+    conn.query(sql, formularioArray, error => {
+        if (error) throw error;
+        res.send('pedido creado');
+    })
+});
+
