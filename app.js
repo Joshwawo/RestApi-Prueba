@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(bodyParser.json());
+app.use( bodyParser.urlencoded({ extended: true }) );
 app.use(cors());
 
 //Mysql
@@ -81,9 +82,8 @@ app.post('/agregarPedido', (req, res) => {
         fecha: req.body.fecha,
         precio: req.body.precio,
         id_producto: req.body.id_producto
-
     }
-
+    
     conn.query(sql, pedidoObj, error => {
         if (error) throw error;
         // res.send('Pedido Creado!!')

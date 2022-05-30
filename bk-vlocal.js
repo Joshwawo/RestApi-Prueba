@@ -11,6 +11,9 @@ app.use(cors());
 
 //Mysql
 
+
+
+
 const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -50,6 +53,8 @@ app.get('/pedido', (req, res) => {
     });
 });
 
+
+
 app.get('/pedido/:id', (req, res) => {
     const { id } = req.params;
 
@@ -74,14 +79,12 @@ app.post('/agregarPedido', (req, res)=>{
         Fecha: req.body.Fecha,
         Precio:req.body.Precio,
         id_Producto:req.body.id_Producto
-
     }
-
+    
     conn.query(sql, pedidoObj, error=>{
         if(error) throw error;
         res.send('Pedido Creado!!')
     });
-
 });
 
 app.put('/actualizar/:id', (req, res)=>{

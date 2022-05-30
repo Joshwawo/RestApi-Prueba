@@ -9,30 +9,16 @@
 </head>
 
 <body>
-    <h1>Hola mundo </h1>
+    <h1 id="h1">Hola mundo </h1>
+    <p id="h2">espacio2</p>
+    <p id="h3">espacio3</p>
+    <p id="h4">espacio4</p>
+    <p id="h5">espacio5</p>
+    <p id="h6">espacio3</p>
 
     <!-- <script src="/fetch.js"></script> -->
-    <script>
-        // fetch('http://localhost:5000')
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
-        console.log('hola mundo')
-        const fetData = async () => {
-
-            try {
-                const res = await fetch('http://localhost:5000/pedido');
-                const data = await res.json();
-                console.log(data[0])
-
-
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        fetData();
-    </script>
-    <!-- <script src="fetch.js"></script> -->
+    
+    <script src="fetch.js"></script>
 </body>
 
 </html>
