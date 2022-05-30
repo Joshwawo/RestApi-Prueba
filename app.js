@@ -105,7 +105,7 @@ app.put('/actualizar/:id', (req, res) => {
 
     });
 
-    if(!id){
+    if (!id) {
         res.send('no existe el pedido con ese id')
     }
 })
@@ -118,6 +118,10 @@ app.delete('/eliminar/:id', (req, res) => {
         if (error) throw error;
         res.send('Pedido Eliminado');
     })
+
+    if (!id) {
+        res.send('no existe el pedido con ese id')
+    }
 })
 
 // app.delete('/delete/:id', (req, res) => {
