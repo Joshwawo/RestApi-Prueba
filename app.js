@@ -57,7 +57,7 @@ setInterval(() => {
 
 //route
 app.get('/', (req, res) => {
-    res.send('Bienvenido a la api de apoyo de ventas local para  producccion 😪😪');
+    res.send('Bienvenido a la api de apoyo de ventas local para  producccion 😀 ');
     // res.send('welcome to my Api')
 });
 
@@ -173,7 +173,7 @@ app.post('/agregarPedido', (req, res) => {
     const sql = 'INSERT INTO pedido SET ?';
     const pedidoObj = {
         cantidad: req.body.cantidad,
-        estado_Pedido: req.body.estado_Pedido,
+        estado_Pedido: 'Pendiente',
         fecha: req.body.fecha,
         precio: req.body.precio,
         id_producto: req.body.id_producto
