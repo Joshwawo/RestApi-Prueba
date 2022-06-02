@@ -173,7 +173,7 @@ app.post('/agregarPedido', (req, res) => {
     const sql = 'INSERT INTO pedido SET ?';
     const pedidoObj = {
         cantidad: req.body.cantidad,
-        estado_Pedido: 'Pendiente',
+        estado_Pedido: req.body.estado_Pedido,
         fecha: req.body.fecha,
         precio: req.body.precio,
         id_producto: req.body.id_producto
