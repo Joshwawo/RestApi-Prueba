@@ -31,6 +31,17 @@ app.use(cors());
 //Prueba
 
 //Mysql
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1;
+var yyyy = today.getFullYear();
+if (dd < 10) {
+    dd = '0' + dd;
+}
+if (mm < 10) {
+    mm = '0' + mm;
+}
+today = yyyy + '-' + mm + '-' + dd;
 
 const conn = mysql.createConnection({
     host: 'us-cdbr-east-05.cleardb.net',
@@ -51,7 +62,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/addped', (req, res) => {
-        // res.send(JSON.stringify(formularioArray))
+    // res.send(JSON.stringify(formularioArray))
 });
 
 // app.post('/addped', (req, res) => {
@@ -69,7 +80,7 @@ app.get('/addped', (req, res) => {
 //         // res.send('pedido creado');
 
 //     })
-    
+
 // });
 
 app.post('/agregarPedido', (req, res) => {
@@ -82,15 +93,15 @@ app.post('/agregarPedido', (req, res) => {
     res.json(JSON.stringify("Guardado en la db"));
     console.log(formularioArray);
 
-    conn.query(sql, formulario, error=>{
-        if(error) throw error;
+    conn.query(sql, formulario, error => {
+        if (error) throw error;
         // res.send('pedido creado');
 
     })
 });
 
-app.put('/act', (req,res)=>{
-    
+app.put('/act', (req, res) => {
+
 })
 
 
@@ -206,6 +217,12 @@ app.delete('/eliminar/:id', (req, res) => {
     if (!id) {
         res.send('no existe el pedido con ese id')
     }
+})
+
+app.get('/getPedido', (req, res) => {
+
+    
+
 })
 
 
