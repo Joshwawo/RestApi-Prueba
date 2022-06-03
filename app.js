@@ -81,7 +81,7 @@ app.get('/addped', (req, res) => {
 
 //     })
 
-// });
+// })sdasdasdsas
 
 app.post('/agregarPedido', (req, res) => {
     const sql = 'INSERT INTO pedido SET ?';
